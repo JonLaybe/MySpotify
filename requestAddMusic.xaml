@@ -1,0 +1,34 @@
+﻿<Window x:Class="Spotify.requestAddMusic"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Spotify"
+        mc:Ignorable="d"
+        Title="requestAddMusic" Height="350" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowStyle="None">
+    <Grid Background="#212121">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70px"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <DockPanel Margin="10px" LastChildFill="False" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <Label Content="Edit details" FontSize="23px" Foreground="White" FontFamily="DokChampa" DockPanel.Dock="Left"></Label>
+            <Image Source="/image/EndAddMusic.png" Width="12px" Height="12px" Margin="17px" HorizontalAlignment="Right" DockPanel.Dock="Top" MouseDown="Image_MouseDown"/>
+        </DockPanel>
+        <Rectangle Grid.Column="0" Grid.Row="1" Width="120px" Height="120px" Stroke="#FF585555" Stretch="Uniform" RadiusX="15" RadiusY="15" MouseDown="FotoAlbom_MouseDown">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="{Binding Path=Path}" Stretch="UniformToFill"></ImageBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <DockPanel Grid.Column="1" Grid.Row="1">
+            <TextBox x:Name="nameAlbom" Height="30px" Background="#3c3c3c" Foreground="White" Margin="5px" MaxLength="25" DockPanel.Dock="Top"></TextBox>
+            <TextBox Background="#FF282828" Foreground="White" Margin="5px" TextWrapping="Wrap"></TextBox>
+        </DockPanel>
+        <Button x:Name="BtnSave" Grid.Column="1" Grid.Row="2" Content="Save" Margin="10px" Width="100px" Height="30px" Foreground="#060606" Background="White" VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="Arial" FontWeight="Bold" Click="BtnSave_Click"/>
+    </Grid>
+</Window>

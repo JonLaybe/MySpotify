@@ -1,0 +1,103 @@
+﻿<Window x:Name="mainWindow" x:Class="Spotify.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Spotify"
+        mc:Ignorable="d"
+        Title="Spotify" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="Col1" Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="3px"></ColumnDefinition>
+            <ColumnDefinition Width="*" x:Name="Col2"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="70px"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Background="Black">
+            <StackPanel Orientation="Vertical" Margin="5px">
+                <Label Content="PLAYLISTS" Foreground="#898989" Margin="5px"></Label>
+                <ListBox x:Name="listBoxPlayList" Background="Black" BorderBrush="Black" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionChanged="listBoxPlayList_SelectionChanged">
+                    <ListBox.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#303030"/>
+                    </ListBox.Resources>
+
+                    <ListBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="\image\ImgAddSongs.jpg" Width="34px"></Image>
+                            <Label Content="Create Playlist" FontSize="13px" Foreground="White" Margin="5px"></Label>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/image/ImgLikedSongs.jpg" Width="34px"/>
+                            <Label Content="Liked Songs" FontSize="13px" Foreground="White" Margin="5px"></Label>
+                        </StackPanel>
+                    </ListBoxItem>
+                </ListBox>
+                <Line Stroke="#303030" StrokeThickness="3px"  X1="0" Y1="0" X2="{Binding ElementName=listBoxPlayList, Path=ActualWidth}" Y2="0" Margin="5px"></Line>
+                <ListBox x:Name="musicAlbum" Background="Black" BorderBrush="Black" FontSize="13px" Foreground="#FFD5D5D5" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionChanged="musicAlbum_SelectionChanged">
+                    <ListBox.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#303030"/>
+                    </ListBox.Resources>
+                </ListBox>
+            </StackPanel>
+        </Grid>
+        <GridSplitter Grid.Column="1" Background="#0a0a0a" HorizontalAlignment="Stretch"></GridSplitter>
+        <Grid x:Name="workMenu" Grid.Column="2">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF4D3797"/>
+                    <GradientStop Color="#FF121212" Offset="0.461"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="200px" Height="200px" Margin="10px" Stroke="#FF585555">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="{Binding Path=Path}" Stretch="UniformToFill"></ImageBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <StackPanel Orientation="Vertical" Margin="5px" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                        <Label Content="Playlist" Foreground="White" FontSize="13px"></Label>
+                        <Label Content="{Binding Path=Name}" Foreground="White" FontSize="25px" FontFamily="Arial Black"></Label>
+                        <Label Content="{Binding Path=Name}" Foreground="#FFD5D5D5" FontSize="15px" FontFamily="Arial Black"></Label>
+                    </StackPanel>
+                    <Label Margin="10px" VerticalAlignment="Bottom"></Label>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <Line Stroke="#303030" StrokeThickness="2px"  X1="0" Y1="0" X2="{Binding ElementName=TrakMusic, Path=ActualWidth}" Y2="0" Margin="5px"></Line>
+                    <Button x:Name="AddMusic" Content="Add" Width="100px" Height="30px" Foreground="Green" Background="White" Margin="5px" HorizontalAlignment="Left" Click="AddMusic_Click"></Button>
+                    <Line Stroke="#303030" StrokeThickness="2px"  X1="0" Y1="0" X2="{Binding ElementName=TrakMusic, Path=ActualWidth}" Y2="0" Margin="5px"></Line>
+                    <ListBox x:Name="TrakMusic" Background="{Binding ElementName=workMenu}" BorderBrush="{Binding ElementName=workMenu}" Foreground="White" FontSize="15px" Margin="10px" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionChanged="TrakMusic_SelectionChanged">
+                        <ListBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#303030"/>
+                        </ListBox.Resources>
+                    </ListBox>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Background="#FF181818">
+            <DockPanel LastChildFill="False">
+                <Label Content="{Binding ElementName=TrakMusic, Path=SelectedItem}" Width="300px" Foreground="White" Margin="10px" DockPanel.Dock="Left"></Label>
+            </DockPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Source="/image/lastTrak.png" Width="15px" Height="15px" DockPanel.Dock="Left" MouseDown="Last_Image_MouseDown"/>
+                <Button x:Name="selectTrakChange" Width="35px" Height="35px" Margin="10px" Click="selectTrakChange_Click">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Grid>
+                                <Ellipse Fill="White" Stroke="Black"></Ellipse>
+                                <Label x:Name="playStop" Content="▶️" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Image Source="/image/nextTrak.png" Width="15px" Height="15px" MouseDown="Next_Image_MouseDown_1"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
